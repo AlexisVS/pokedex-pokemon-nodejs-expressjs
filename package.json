@@ -1,0 +1,22 @@
+{
+  "name": "pokedex-nodejs-expressjs",
+  "version": "1.0.0",
+  "description": "Pokedex Pokemon writted in NodeJS and ExpressJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexisVS/pokedex-pokemon-nodejs-expressjs.git"
+  },
+  "author": "AlexisVS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexisVS/pokedex-pokemon-nodejs-expressjs/issues"
+  },
+  "homepage": "https://github.com/AlexisVS/pokedex-pokemon-nodejs-expressjs#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
