@@ -3,6 +3,7 @@ const POKEMONS = require('./mock-pokemon.js');
 const {success, getUniqueId} = require('./helper');
 const MORGAN = require('morgan');
 const FAVICON = require('serve-favicon');
+const BODY_PARSER = require('body-parser');
 
 const APP = EXPRESS();
 const APP_PORT = 3000;
@@ -14,7 +15,9 @@ const LOGGER = (req, res, next) => {
 }
 APP
     .use(FAVICON(__dirname + '/favicon.ico'))
-    .use(MORGAN('dev'), LOGGER);
+    .use(MORGAN('dev'))
+    .use(LOGGER)
+    .use(BODY_PARSER.json())
 
 // --- ROUTES ---
 APP.get('/', (req, res) => res.send('sdf'))
@@ -32,8 +35,10 @@ APP.get('/api/v1/pokemon/:id', (req, res) => {
 
 //POST
 APP.post('/api/v1/pokemons', (req, res) => {
-    POKEMONS.push(...req.body, ...{id: getUniqueId()});
-    return res.json(success("Pokemon ajouté", req.body))
+    const POKEMON_ID = getUniqueId(POKEMONS);
+    const POKEMON = {...req.body, id: POKEMON_ID};
+    POKEMONS.push(POKEMON)
+    return res.json(success("Pokemon ajouté", POKEMON))
 });
 
 
