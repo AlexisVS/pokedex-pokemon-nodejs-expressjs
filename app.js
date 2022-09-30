@@ -1,6 +1,6 @@
 const EXPRESS = require('express');
 const POKEMONS = require('./mock-pokemon.js');
-const {success} = require('./helper');
+const {success, getUniqueId} = require('./helper');
 const MORGAN = require('morgan');
 const FAVICON = require('serve-favicon');
 
@@ -31,10 +31,9 @@ APP.get('/api/v1/pokemon/:id', (req, res) => {
 });
 
 //POST
-APP.get('/api/v1/pokemonss', (req, res) => {
-   let pokemonId = POKEMONS.sort((a,b) => b.id - a.id).at(0).id
-    console.log(typeof pokemonId)
-    return res.send(toString( pokemonId))
+APP.post('/api/v1/pokemons', (req, res) => {
+    POKEMONS.push(...req.body, ...{id: getUniqueId()});
+    return res.json(success("Pokemon ajouté", req.body))
 });
 
 
