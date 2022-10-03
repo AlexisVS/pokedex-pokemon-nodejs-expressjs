@@ -55,7 +55,6 @@ APP.put('/api/v1/pokemon', (req, res) => {
 
 
 // DESTROY
-
 APP.delete("/api/v1/pokemons/:id", (req, res) => {
     const POKEMON_ID = req.params.id;
     POKEMONS.splice(POKEMONS.findIndex(pokemon => pokemon.id === POKEMON_ID), 1);
