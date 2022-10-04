@@ -1,0 +1,21 @@
+_id: req_2176c63a7d3e41a2b3919b7d3d616825
+type: Request
+parentId: wrk_04679e8946584f0baf5be6d035547e53
+modified: 1664804199653
+created: 1664802404690
+url: http://localhost:3000/api/v1/pokemons/4
+name: Delete one Pokemon
+description: ""
+method: DELETE
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1664802404690
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

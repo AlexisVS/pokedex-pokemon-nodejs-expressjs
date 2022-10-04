@@ -1,0 +1,21 @@
+_id: req_68fe76d96f3c4f4c89b5c2ad05c5d00b
+type: Request
+parentId: wrk_04679e8946584f0baf5be6d035547e53
+modified: 1664802376593
+created: 1664802368394
+url: http://localhost:3000/api/v1/pokemon/1
+name: Get One pokemon
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1664493561014
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

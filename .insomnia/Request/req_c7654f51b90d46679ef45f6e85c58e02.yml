@@ -1,0 +1,21 @@
+_id: req_c7654f51b90d46679ef45f6e85c58e02
+type: Request
+parentId: wrk_04679e8946584f0baf5be6d035547e53
+modified: 1664493836652
+created: 1664493561064
+url: http://localhost:3000/api/v1/pokemons
+name: Get all Pokemons
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1664493561064
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

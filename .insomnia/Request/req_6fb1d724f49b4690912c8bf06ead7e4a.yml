@@ -1,0 +1,43 @@
+_id: req_6fb1d724f49b4690912c8bf06ead7e4a
+type: Request
+parentId: wrk_04679e8946584f0baf5be6d035547e53
+modified: 1664912949354
+created: 1664495225921
+url: http://localhost:3000/api/v1/pokemons
+name: Post Pokemon
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: >-
+    {
+    		"name": "Papillusion",
+    		"description": "Il y a une graine sur son dos depuis sa naissance. Elle grossit un peu chaque jour.",
+    		"height": 0.7,
+    		"weight": 6.9,
+    		"category": "Graine",
+    		"types": [
+    			{
+    				"id": 1,
+    				"name": "Plante"
+    			},
+    			{
+    				"id": 2,
+    				"name": "Poison"
+    			}
+    		]
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_c95fd1c185f84fa88f8d6ca7899d9529
+authentication: {}
+metaSortKey: -1664495225921
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
