@@ -48,6 +48,7 @@ APP.get('/api/v1/pokemon/:id', async (req, res) => {
     const POKEMON = await Pokemon.findByPk(POKEMON_ID, {
         include: [
             {
+
                 association: 'types',
             }
         ]
