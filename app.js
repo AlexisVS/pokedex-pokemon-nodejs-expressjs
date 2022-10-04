@@ -1,15 +1,15 @@
 const EXPRESS = require('express');
-const POKEMONS = require('./mock-pokemon.js');
 const {success, getUniqueId} = require('./helper');
 const MORGAN = require('morgan');
 const FAVICON = require('serve-favicon');
 const BODY_PARSER = require('body-parser');
-const PokemonModels = require("./src/Models/PokemonClass");
-
-const POKEMONS_MODEL = new PokemonModels(POKEMONS);
+const {Sequelize, DataTypes} = require('sequelize');
+const POKEMON_MODEL = require('./models/pokemon');
+const {sequelize, Pokemon, PokemonType, PokemonType_Pokemon} = require('./models');
 
 const APP = EXPRESS();
 const APP_PORT = 3000;
+
 
 // MIDDLEWARE
 const LOGGER = (req, res, next) => {
@@ -26,40 +26,60 @@ APP
 APP.get('/', (req, res) => res.send('sdf'))
 
 // INDEX
-APP.get('/api/v1/pokemons', (req, res) => res.json(success('Tous les pokemons ont été trouvés', POKEMONS)));
+APP.get('/api/v1/pokemons', async (req, res) => res.json(success('Tous les pokemons ont été trouvés',
+    await Pokemon.findAll(
+        {
+            include: [
+                {
+                    association: 'types',
+                    attributes: ['id', 'name'],
+                    through: {
+                        attributes: []
+                    }
+                }
+            ]
+        }
+    )
+)));
 
 // SHOW
-APP.get('/api/v1/pokemon/:id', (req, res) => {
+APP.get('/api/v1/pokemon/:id', async (req, res) => {
     const POKEMON_ID = parseInt(req.params.id);
-    const POKEMON = POKEMONS_MODEL.show(POKEMON_ID);
+    const POKEMON = await Pokemon.findByPk(POKEMON_ID, {
+        include: [
+            {
+                association: 'types',
+            }
+        ]
+    });
     const MESSAGE = "Votre pokémon à bien été trouvé.";
     return res.json(success(MESSAGE, POKEMON));
 });
 
 // POST
-APP.post('/api/v1/pokemons', (req, res) => {
-    const POKEMON_ID = getUniqueId(POKEMONS);
-    const POKEMON = {...req.body, id: POKEMON_ID};
-    POKEMONS.push(POKEMON)
-    return res.json(success("Pokemon ajouté", POKEMON))
+APP.post('/api/v1/pokemons', async (req, res) => {
+    const POKEMON_DATA = {...req.body};
+    const POKEMON = await Pokemon.create(POKEMON_DATA, {
+        include: [{association: 'PokemonType_Pokemon',as: 'types'}]
+    });
+    return res.json(success("Pokemon ajouté", POKEMON));
 });
 
 // UPDATE
-APP.put('/api/v1/pokemon', (req, res) => {
-    const POKEMON_ID = req.body.id;
-    const POKEMON = {...req.body};
-    POKEMONS.splice(POKEMONS.findIndex(pokemon => pokemon.id === POKEMON_ID), 1);
-    POKEMONS.push(POKEMON);
-    return res.json(success("Pokemon ajouté", POKEMONS.find(item => item.id === POKEMON_ID)))
+APP.put('/api/v1/pokemon', async (req, res) => {
+    const POKEMON_DATA = {...req.body};
+    const POKEMON = await Pokemon.upsert(POKEMON_DATA);
+    return res.json(success("Pokemon ajouté", POKEMON));
 });
 
 
 // DESTROY
-APP.delete("/api/v1/pokemons/:id", (req, res) => {
+APP.delete("/api/v1/pokemons/:id", async (req, res) => {
     const POKEMON_ID = req.params.id;
-    POKEMONS.splice(POKEMONS.findIndex(pokemon => pokemon.id === POKEMON_ID), 1);
+    const POKEMON = await Pokemon.findByPk(POKEMON_ID);
+    await Pokemon.destroy({where: {id: POKEMON_ID}});
 
-    return res.json(success("Pokemon supprimé"))
+    return res.json(success("Pokemon supprimé", POKEMON));
 });
 
 APP.listen(APP_PORT, () => console.log(`APP turning on :  http://localhost:${APP_PORT}`));

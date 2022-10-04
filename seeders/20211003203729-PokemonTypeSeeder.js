@@ -14,27 +14,27 @@ module.exports = {
          *   isBetaMember: false
          * }], {});
          */
-        await queryInterface.bulkInsert('PokemonTypes', [
+        await queryInterface.bulkInsert('pokemon-types', [
             {
                 name: "Plante",
-                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Poison",
-                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Feu",
-                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Vol",
-                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Eau",
-                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
             }
         ]);
     },

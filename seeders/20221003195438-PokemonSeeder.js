@@ -14,7 +14,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Pokemons', [
+    await queryInterface.bulkInsert('pokemons', [
       {
         id: 1,
         name: "Bulbizarre",
@@ -22,8 +22,8 @@ module.exports = {
         height: 0.7,
         weight: 6.9,
         category: 'Graine',
-        createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-        updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+        updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
       }, {
         id: 2,
         name: "Herbizarre",
@@ -31,8 +31,8 @@ module.exports = {
         height: 1,
         weight: 13,
         category: 'Graine',
-        createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-        updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+        updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
       }, {
         id: 3,
         name: "Florizarre",
@@ -40,8 +40,8 @@ module.exports = {
         height: 2,
         weight: 100,
         category: 'Graine',
-        createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-        updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+        updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
       },
     ]);
   },

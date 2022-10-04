@@ -4,7 +4,8 @@
   "description": "Pokedex Pokemon writted in NodeJS and ExpressJS",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "db:reset": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm run start"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "sequelize-cli": "^6.5.1"
