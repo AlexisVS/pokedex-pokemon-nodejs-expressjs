@@ -5,7 +5,7 @@ const FAVICON = require('serve-favicon');
 const BODY_PARSER = require('body-parser');
 const {Sequelize, DataTypes} = require('sequelize');
 const POKEMON_MODEL = require('./models/pokemon');
-const {sequelize, Pokemon, PokemonType, PokemonType_Pokemon} = require('./models');
+const {sequelize, pokemon, pokemonType, pokemonTypePokemon} = require('./models');
 
 const APP = EXPRESS();
 const APP_PORT = 3000;
@@ -27,12 +27,12 @@ APP.get('/', (req, res) => res.send('sdf'))
 
 // INDEX
 APP.get('/api/v1/pokemons', async (req, res) => res.json(success('Tous les pokemons ont été trouvés',
-    await Pokemon.findAll(
+    await pokemon.findAll(
         {
             include: [
                 {
                     association: 'types',
-                    attributes: ['id', 'name'],
+                    // attributes: ['id', 'name'],
                     through: {
                         attributes: []
                     }
@@ -45,7 +45,7 @@ APP.get('/api/v1/pokemons', async (req, res) => res.json(success('Tous les pokem
 // SHOW
 APP.get('/api/v1/pokemon/:id', async (req, res) => {
     const POKEMON_ID = parseInt(req.params.id);
-    const POKEMON = await Pokemon.findByPk(POKEMON_ID, {
+    const POKEMON = await pokemon.findByPk(POKEMON_ID, {
         include: [
             {
 
@@ -60,8 +60,8 @@ APP.get('/api/v1/pokemon/:id', async (req, res) => {
 // POST
 APP.post('/api/v1/pokemons', async (req, res) => {
     const POKEMON_DATA = {...req.body};
-    const POKEMON = await Pokemon.create(POKEMON_DATA, {
-        include: [{association: 'PokemonType_Pokemon',as: 'types'}]
+    const POKEMON = await pokemon.create(POKEMON_DATA, {
+        include: [{association: 'types', model: pokemonTypePokemon, }]
     });
     return res.json(success("Pokemon ajouté", POKEMON));
 });
@@ -69,7 +69,7 @@ APP.post('/api/v1/pokemons', async (req, res) => {
 // UPDATE
 APP.put('/api/v1/pokemon', async (req, res) => {
     const POKEMON_DATA = {...req.body};
-    const POKEMON = await Pokemon.upsert(POKEMON_DATA);
+    const POKEMON = await pokemon.upsert(POKEMON_DATA);
     return res.json(success("Pokemon ajouté", POKEMON));
 });
 
@@ -77,8 +77,8 @@ APP.put('/api/v1/pokemon', async (req, res) => {
 // DESTROY
 APP.delete("/api/v1/pokemons/:id", async (req, res) => {
     const POKEMON_ID = req.params.id;
-    const POKEMON = await Pokemon.findByPk(POKEMON_ID);
-    await Pokemon.destroy({where: {id: POKEMON_ID}});
+    const POKEMON = await pokemon.findByPk(POKEMON_ID);
+    await pokemon.destroy({where: {id: POKEMON_ID}});
 
     return res.json(success("Pokemon supprimé", POKEMON));
 });

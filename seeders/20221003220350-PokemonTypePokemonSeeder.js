@@ -15,25 +15,25 @@ module.exports = {
          */
         await queryInterface.bulkInsert('pokemon-type_pokemons', [
             {
-                pokemon_id: 1,
-                pokemon_type_id: 1,
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                pokemonId: 1,
+                pokemonTypeId: 1,
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
-                pokemon_id: 1,
-                pokemon_type_id: 2,
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                pokemonId: 1,
+                pokemonTypeId: 2,
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
-                pokemon_id: 2,
-                pokemon_type_id: 1,
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                pokemonId: 2,
+                pokemonTypeId: 1,
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
-                pokemon_id: 3,
-                pokemon_type_id: 1,
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                pokemonId: 3,
+                pokemonTypeId: 1,
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }
         ]);
     },

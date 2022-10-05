@@ -17,24 +17,24 @@ module.exports = {
         await queryInterface.bulkInsert('pokemon-types', [
             {
                 name: "Plante",
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Poison",
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Feu",
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Vol",
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
                 name: "Eau",
-                created_at: moment().format("YYYY-MM-DD hh:mm:ss"),
-                updated_at: moment().format("YYYY-MM-DD hh:mm:ss"),
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+                updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }
         ]);
     },

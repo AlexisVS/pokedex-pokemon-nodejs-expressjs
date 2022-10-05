@@ -8,29 +8,35 @@ module.exports = {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER
+                type: DataTypes.INTEGER
             },
-            pokemon_id: {
+            pokemonId: {
                 type: DataTypes.INTEGER,
                 references: {
-                    model: 'pokemons',
-                    key: 'id'
-                }
+                    model: {
+                        tableName:'pokemons'
+                    },
+                    key: 'id',
+                },
+                allowNull: false
             },
-            pokemon_type_id: {
+            pokemonTypeId: {
                 type: DataTypes.INTEGER,
                 references: {
-                    model: 'pokemon-types',
+                    model: {
+                        tableName: 'pokemon-types',
+                    },
                     key: 'id'
-                }
+                },
+                allowNull: false
             },
-            created_at: {
+            createdAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: DataTypes.DATE
             },
-            updated_at: {
+            updatedAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: DataTypes.DATE
             }
         });
     },
