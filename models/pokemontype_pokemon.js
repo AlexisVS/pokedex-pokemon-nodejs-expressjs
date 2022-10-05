@@ -10,8 +10,14 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            this.belongsTo(models.pokemon);
-            this.belongsTo(models.pokemonType);
+            this.belongsTo(models.Pokemon, {
+                foreignKey: 'pokemonId',
+                as: 'pokemon'
+            });
+            this.belongsTo(models.PokemonType, {
+                foreignKey: 'pokemonTypeId',
+                as: 'pokemonType'
+            });
         }
     }
 
@@ -20,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         pokemonTypeId: DataTypes.INTEGER
     }, {
         sequelize,
-        modelName: 'pokemonTypePokemon',
+        modelName: 'PokemonTypePokemon',
         tableName: 'pokemon-type_pokemons',
         freezeTableName: true
     });

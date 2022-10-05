@@ -11,11 +11,13 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            this.belongsToMany(models.pokemonType, {
+            this.belongsToMany(models.PokemonType, {
                 as: 'types',
-                through: models.pokemonTypePokemon,
+                through: 'pokemon-type_pokemons',
+                foreignKey: 'pokemonId',
             });
-            this.hasMany(models.pokemonTypePokemon);
+            // this.hasMany(models.pokemonTypePokemon, {
+            // });
         }
     }
 
@@ -27,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         category: DataTypes.STRING
     }, {
         sequelize,
-        modelName: 'pokemon',
+        modelName: 'Pokemon',
         tableName: 'pokemons',
         freezeTableName: true
     });

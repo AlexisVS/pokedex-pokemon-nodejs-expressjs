@@ -5,7 +5,8 @@ const FAVICON = require('serve-favicon');
 const BODY_PARSER = require('body-parser');
 const {Sequelize, DataTypes} = require('sequelize');
 const POKEMON_MODEL = require('./models/pokemon');
-const {sequelize, pokemon, pokemonType, pokemonTypePokemon} = require('./models');
+const {sequelize, Pokemon, PokemonType, PokemonTypePokemon} = require('./models');
+const {db} = sequelize;
 
 const APP = EXPRESS();
 const APP_PORT = 3000;
@@ -27,43 +28,53 @@ APP.get('/', (req, res) => res.send('sdf'))
 
 // INDEX
 APP.get('/api/v1/pokemons', async (req, res) => res.json(success('Tous les pokemons ont été trouvés',
-    await pokemon.findAll(
+    await Pokemon.findAll(
         {
             include: [
                 {
                     association: 'types',
-                    // attributes: ['id', 'name'],
-                    through: {
-                        attributes: []
-                    }
                 }
             ]
         }
     )
 )));
 
-// SHOW
-APP.get('/api/v1/pokemon/:id', async (req, res) => {
-    const POKEMON_ID = parseInt(req.params.id);
-    const POKEMON = await pokemon.findByPk(POKEMON_ID, {
-        include: [
-            {
-
-                association: 'types',
-            }
-        ]
-    });
-    const MESSAGE = "Votre pokémon à bien été trouvé.";
-    return res.json(success(MESSAGE, POKEMON));
-});
+// // SHOW
+// APP.get('/api/v1/pokemon/:id', async (req, res) => {
+//     const POKEMON_ID = parseInt(req.params.id);
+//     const POKEMON = Pokemon.findAll(
+//         {
+//             where: {id: POKEMON_ID},
+//             include: [
+//                 {
+//                     association: 'types',
+//                     attributes: ['id', 'name'],
+//                     where: {pokemonId: POKEMON_ID},
+//                     through: {
+//                         attributes: []
+//                     }
+//                 }
+//             ]
+//         }
+//     );
+//     const MESSAGE = "Votre pokémon à bien été trouvé.";
+//     return res.json(success(MESSAGE, await POKEMON));
+// });
 
 // POST
 APP.post('/api/v1/pokemons', async (req, res) => {
     const POKEMON_DATA = {...req.body};
-    const POKEMON = await pokemon.create(POKEMON_DATA, {
-        include: [{association: 'types', model: pokemonTypePokemon, }]
-    });
-    return res.json(success("Pokemon ajouté", POKEMON));
+    let pokemon = await Pokemon.create(POKEMON_DATA, {
+        include: [
+            {
+                association: 'types',
+                attributes: [['id', 'pokemonTypeId']]
+            }
+        ]
+    })
+
+
+    return res.json(success("Pokemon ajouté", pokemon));
 });
 
 // UPDATE
