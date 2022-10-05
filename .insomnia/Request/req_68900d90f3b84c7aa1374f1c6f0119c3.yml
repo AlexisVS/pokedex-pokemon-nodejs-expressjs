@@ -1,33 +1,25 @@
 _id: req_68900d90f3b84c7aa1374f1c6f0119c3
 type: Request
-parentId: wrk_04679e8946584f0baf5be6d035547e53
-modified: 1664885376744
+parentId: fld_fb57927a6a7c4e5cb6ea3ca76addf218
+modified: 1665005237452
 created: 1664802663133
 url: http://localhost:3000/api/v1/pokemon
-name: Update Pokemon
+name: update
 description: ""
 method: PUT
 body:
   mimeType: application/json
-  text: >-
+  text: |-
     		{
-    			"id": 4,
-    			"name": "Chrisacier",
-    			"description": "Il y a une graine sur son dos depuis sa naissance. Elle grossit un peu chaque jour.",
-    			"height": 0.7,
-    			"weight": 6.9,
-    			"category": "Graine",
-    			"type": [
-    				"plante",
-    				"poison"
-    			]
+    			"name": "Papillusion",
+    			"types": [5]
     		}
 parameters: []
 headers:
   - name: Content-Type
     value: application/json
 authentication: {}
-metaSortKey: -1664802663133
+metaSortKey: -1664903936396.75
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
