@@ -1,0 +1,10 @@
+_id: fld_fb57927a6a7c4e5cb6ea3ca76addf218
+type: RequestGroup
+parentId: wrk_04679e8946584f0baf5be6d035547e53
+modified: 1665005209548
+created: 1665005209548
+name: pokemons
+description: ""
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1665005209548
