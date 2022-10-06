@@ -1,7 +1,7 @@
 _id: req_6fb1d724f49b4690912c8bf06ead7e4a
 type: Request
 parentId: fld_fb57927a6a7c4e5cb6ea3ca76addf218
-modified: 1665006833608
+modified: 1665087858810
 created: 1664495225921
 url: http://localhost:3000/api/v1/pokemons
 name: post
@@ -16,11 +16,7 @@ body:
     			"height": 2,
     			"weight": 100,
     			"category": "Graine",
-    			"types": [
-    					{
-    						"id": 1
-    					}
-    			]
+    			"PokemonTypePokemon": [1,2,3]
     }
 parameters: []
 headers:

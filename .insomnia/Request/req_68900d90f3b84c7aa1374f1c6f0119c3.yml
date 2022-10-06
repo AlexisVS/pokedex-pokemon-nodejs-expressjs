@@ -1,7 +1,7 @@
 _id: req_68900d90f3b84c7aa1374f1c6f0119c3
 type: Request
 parentId: fld_fb57927a6a7c4e5cb6ea3ca76addf218
-modified: 1665005237452
+modified: 1665087887249
 created: 1664802663133
 url: http://localhost:3000/api/v1/pokemon
 name: update
@@ -11,8 +11,9 @@ body:
   mimeType: application/json
   text: |-
     		{
+    			"id": 4,
     			"name": "Papillusion",
-    			"types": [5]
+    			"PokemonTypePokemon": [5]
     		}
 parameters: []
 headers:
