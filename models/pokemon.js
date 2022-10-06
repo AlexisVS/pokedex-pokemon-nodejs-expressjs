@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            this.belongsToMany(models.PokemonType, {
-                as: 'types',
-                through: 'pokemon-type_pokemons',
-                foreignKey: 'pokemonId',
-            });
+            // this.belongsToMany(models.PokemonType, {
+            //     as: 'types',
+            //     through: 'pokemon-type_pokemons',
+            //     foreignKey: 'pokemonId',
+            // });
             // this.hasMany(models.pokemonTypePokemon, {
             // });
         }

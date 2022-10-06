@@ -10,7 +10,7 @@ module.exports = {
                 primaryKey: true,
                 type: DataTypes.INTEGER
             },
-            pokemonId: {
+            PokemonId: {
                 type: DataTypes.INTEGER,
                 references: {
                     model: {
@@ -20,7 +20,7 @@ module.exports = {
                 },
                 allowNull: false
             },
-            pokemonTypeId: {
+            PokemonTypeId: {
                 type: DataTypes.INTEGER,
                 references: {
                     model: {

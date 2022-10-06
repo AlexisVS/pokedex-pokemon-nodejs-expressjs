@@ -15,23 +15,23 @@ module.exports = {
          */
         await queryInterface.bulkInsert('pokemon-type_pokemons', [
             {
-                pokemonId: 1,
-                pokemonTypeId: 1,
+                PokemonId: 1,
+                PokemonTypeId: 1,
                 createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
                 updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
-                pokemonId: 1,
-                pokemonTypeId: 2,
+                PokemonId: 1,
+                PokemonTypeId: 2,
                 createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
                 updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
-                pokemonId: 2,
-                pokemonTypeId: 1,
+                PokemonId: 2,
+                PokemonTypeId: 1,
                 createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
                 updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }, {
-                pokemonId: 3,
-                pokemonTypeId: 1,
+                PokemonId: 3,
+                PokemonTypeId: 1,
                 createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
                 updatedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
             }

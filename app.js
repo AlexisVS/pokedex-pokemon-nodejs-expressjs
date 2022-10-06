@@ -21,58 +21,44 @@ APP
     .use(FAVICON(__dirname + '/favicon.ico'))
     .use(MORGAN('dev'))
     .use(LOGGER)
-    .use(BODY_PARSER.json())
+    .use(BODY_PARSER.json());
 
 // --- ROUTES ---
 APP.get('/', (req, res) => res.send('sdf'))
 
 // INDEX
-APP.get('/api/v1/pokemons', async (req, res) => res.json(success('Tous les pokemons ont été trouvés',
-    await Pokemon.findAll(
-        {
-            include: [
-                {
-                    association: 'types',
-                }
-            ]
-        }
-    )
-)));
+APP.get('/api/v1/pokemons', async (req, res) => res.json(success('Tous les pokemons ont été trouvés', await Pokemon.findAll({
+    include: [PokemonType]
+}))));
 
-// // SHOW
-// APP.get('/api/v1/pokemon/:id', async (req, res) => {
-//     const POKEMON_ID = parseInt(req.params.id);
-//     const POKEMON = Pokemon.findAll(
-//         {
-//             where: {id: POKEMON_ID},
-//             include: [
-//                 {
-//                     association: 'types',
-//                     attributes: ['id', 'name'],
-//                     where: {pokemonId: POKEMON_ID},
-//                     through: {
-//                         attributes: []
-//                     }
-//                 }
-//             ]
-//         }
-//     );
-//     const MESSAGE = "Votre pokémon à bien été trouvé.";
-//     return res.json(success(MESSAGE, await POKEMON));
-// });
+// SHOW
+APP.get('/api/v1/pokemon/:id', async (req, res) => {
+    const POKEMON_ID = parseInt(req.params.id);
+    const POKEMON = Pokemon.findAll({
+        where: {id: POKEMON_ID},
+        include: [{
+            model: PokemonType
+        }]
+    });
+    const MESSAGE = "Votre pokémon à bien été trouvé.";
+
+    return res.json(success(MESSAGE, await POKEMON));
+});
 
 // POST
 APP.post('/api/v1/pokemons', async (req, res) => {
     const POKEMON_DATA = {...req.body};
-    let pokemon = await Pokemon.create(POKEMON_DATA, {
-        include: [
-            {
-                association: 'types',
-                attributes: [['id', 'pokemonTypeId']]
-            }
-        ]
-    })
-
+    let pokemon = await Pokemon.create(POKEMON_DATA)
+        .then(async (pokemon) => {
+            await pokemon.addPokemonTypes(POKEMON_DATA.PokemonTypePokemon);
+            return pokemon;
+        })
+        .then(async (pokemon) => {
+            return await Pokemon.findAll({
+                where: {id: pokemon.id},
+                include: [PokemonType],
+            });
+        });
 
     return res.json(success("Pokemon ajouté", pokemon));
 });
@@ -80,16 +66,41 @@ APP.post('/api/v1/pokemons', async (req, res) => {
 // UPDATE
 APP.put('/api/v1/pokemon', async (req, res) => {
     const POKEMON_DATA = {...req.body};
-    const POKEMON = await pokemon.upsert(POKEMON_DATA);
+    const POKEMON = await Pokemon.findAll({
+        where: {id: POKEMON_DATA.id},
+        include: [PokemonType]
+    }).then(async (pokemon) => {
+        let pokemonModel = pokemon.at(0);
+        await pokemonModel.update(POKEMON_DATA);
+        await pokemonModel.removePokemonTypes(await pokemonModel.getPokemonTypes());
+        await pokemonModel.addPokemonTypes(POKEMON_DATA.PokemonTypePokemon);
+        return Pokemon.findAll({
+            where: {id: pokemonModel.id}, include: [PokemonType]
+        });
+    });
+
     return res.json(success("Pokemon ajouté", POKEMON));
 });
 
 
 // DESTROY
 APP.delete("/api/v1/pokemons/:id", async (req, res) => {
-    const POKEMON_ID = req.params.id;
-    const POKEMON = await pokemon.findByPk(POKEMON_ID);
-    await pokemon.destroy({where: {id: POKEMON_ID}});
+    const POKEMON_ID = parseInt(req.params.id);
+    const POKEMON = await Pokemon.findAll({
+        where: {id: POKEMON_ID},
+        include: [PokemonType]
+    }).then(async (pokemon) => {
+        return [pokemon.at(0), await pokemon.at(0).getPokemonTypes()]
+    }).then(async (data) => {
+        let [pokemon, pokemonTypes] = data;
+        pokemon.removePokemonTypes(pokemonTypes);
+        return pokemon;
+    }).then( (pokemon) => {
+        Pokemon.destroy({
+            where: {id: POKEMON_ID}
+        });
+        return pokemon;
+    });
 
     return res.json(success("Pokemon supprimé", POKEMON));
 });

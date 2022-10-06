@@ -10,20 +10,21 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            this.belongsTo(models.Pokemon, {
-                foreignKey: 'pokemonId',
-                as: 'pokemon'
+            this.belongsTo(models.Pokemon);
+            this.belongsTo(models.PokemonType);
+            models.Pokemon.belongsToMany(models.PokemonType, {
+                through: this,
             });
-            this.belongsTo(models.PokemonType, {
-                foreignKey: 'pokemonTypeId',
-                as: 'pokemonType'
-            });
+
+            models.PokemonType.belongsToMany(models.Pokemon, {
+                through: this,
+            })
         }
     }
 
     PokemonType_Pokemon.init({
-        pokemonId: DataTypes.INTEGER,
-        pokemonTypeId: DataTypes.INTEGER
+        PokemonId: DataTypes.INTEGER,
+        PokemonTypeId: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'PokemonTypePokemon',
